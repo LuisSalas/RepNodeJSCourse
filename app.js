@@ -7,7 +7,14 @@ const http = require("http");
  * Create an HTTP server that listens for requests and logs the request object to the console.
  */
 const server = http.createServer((req, res) => {
-  console.log(req);
+  console.log(req.url, req.method, req.headers);
+  //process.exit(); // This will stop the server after the first request.
+  res.setHeader("Content-Type", "text/html"); // Set the response header
+  res.write("<html>"); // Start the response body
+  res.write("<head><title>My First Page</title></head>");
+  res.write("<body><h1>Hello from my Node.js Server!</h1></body>");
+  res.write("</html>"); // End the response body
+  res.end(); // Send the response
 });
 
 /**

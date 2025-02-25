@@ -18,8 +18,6 @@ const server = http.createServer((req, res) => {
   const url = req.url; // Get the URL from the request object
   const method = req.method; // Get the method from the request object
 
-  console.log(url, method); // Log the URL and method to the console
-
   if (url === "/") {
     res.write("<html>"); // Start the response body
     res.write("<head><title>Enter Message</title></head>");
@@ -36,7 +34,18 @@ const server = http.createServer((req, res) => {
   }
 
   if (url === "/message" && method === "POST") {
-    fs.writeFileSync("message.txt", "DUMMY"); // Write a file
+    const reqBody = []; // Create an array to store the request body
+
+    req.on("data", (chunk) => {
+      reqBody.push(chunk); // Push the data chunks to the array
+    });
+
+    req.on("end", () => {
+      const parsedBody = Buffer.concat(reqBody).toString(); // Concatenate the data chunks and convert to a string
+      const message = parsedBody.split("=")[1]; // Extract the message from the parsed body
+      fs.writeFileSync("message.txt", message); // Write a file
+    }); // Listen for the end event
+
     res.statusCode = 302; // Set the status code to 302 -> Redirect
     res.setHeader("location", "/"); // Set the response header
     return res.end(); // Send the response -> Redirect the user to the home page

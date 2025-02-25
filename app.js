@@ -40,15 +40,15 @@ const server = http.createServer((req, res) => {
       reqBody.push(chunk); // Push the data chunks to the array
     });
 
-    req.on("end", () => {
+    return req.on("end", () => {
       const parsedBody = Buffer.concat(reqBody).toString(); // Concatenate the data chunks and convert to a string
       const message = parsedBody.split("=")[1]; // Extract the message from the parsed body
-      fs.writeFileSync("message.txt", message); // Write a file
+      fs.writeFile("message.txt", message, (err) => {
+        res.statusCode = 302; // Set the status code to 302 -> Redirect
+        res.setHeader("location", "/"); // Set the response header
+        return res.end(); // Send the response -> Redirect the user to the home page
+      }); // Write a file
     }); // Listen for the end event
-
-    res.statusCode = 302; // Set the status code to 302 -> Redirect
-    res.setHeader("location", "/"); // Set the response header
-    return res.end(); // Send the response -> Redirect the user to the home page
   }
 
   // Set the response header

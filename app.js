@@ -1,19 +1,9 @@
-/**
- * Import the http module to create an HTTP server.
- */
 const http = require("http");
 
-const routes = require("./routes");
+const express = require("express");
 
-/**
- * Create an HTTP server that listens for requests and logs the request object to the console.
- *
- * @param {http.IncomingMessage} req - The request object.
- * @param {http.ServerResponse} res - The response object.
- */
-const server = http.createServer(routes);
+const app = express();
 
-/**
- * The server listens on port 3000.
- */
+const server = http.createServer(app);
+
 server.listen(3000);

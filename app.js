@@ -14,7 +14,13 @@ app.use("/add-product", (req, res, next) => {
   );
 });
 
-app.use("/product", (req, res, next) => {
+/*
+  app.use will work for all the requests
+  app.post will work only for post requests
+  app.get will work only for get requests
+*/
+
+app.post("/product", (req, res, next) => {
   console.log(req.body);
   res.redirect("/");
 });

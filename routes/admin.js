@@ -1,23 +1,26 @@
-const express = require("express");
-
-const router = express.Router();
-
-router.get("/add-product", (req, res, next) => {
-  res.send(
-    `<form action='/product' method='POST'>
-        <input type='text' name='product'>
-        <button type='submit'>Add Product</button>
-      </form>`
-  );
-});
-
 /*
     router.use will work for all the requests
     router.post will work only for post requests
     router.get will work only for get requests
   */
 
-router.post("/product", (req, res, next) => {
+const express = require("express");
+
+// The  express.Router()  function is used to create a new router object. This function is used when you want to create a new router object in your application to handle requests.
+const router = express.Router();
+
+// /admin/add-product => GET
+router.get("/add-product", (req, res, next) => {
+  res.send(
+    `<form action='/admin/add-product' method='POST'>
+        <input type='text' name='product'>
+        <button type='submit'>Add Product</button>
+      </form>`
+  );
+});
+
+// /admin/add-product => POST
+router.post("/add-product", (req, res, next) => {
   console.log(req.body);
   res.redirect("/");
 });

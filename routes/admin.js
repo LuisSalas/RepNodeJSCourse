@@ -4,6 +4,8 @@
     router.get will work only for get requests
   */
 
+const path = require("path");
+
 const express = require("express");
 
 // The  express.Router()  function is used to create a new router object. This function is used when you want to create a new router object in your application to handle requests.
@@ -11,12 +13,13 @@ const router = express.Router();
 
 // /admin/add-product => GET
 router.get("/add-product", (req, res, next) => {
-  res.send(
-    `<form action='/admin/add-product' method='POST'>
-        <input type='text' name='product'>
-        <button type='submit'>Add Product</button>
-      </form>`
-  );
+  // res.send(
+  //   `<form action='/admin/add-product' method='POST'>
+  //       <input type='text' name='product'>
+  //       <button type='submit'>Add Product</button>
+  //     </form>`
+  // );
+  res.sendFile(path.join(__dirname, "../", "views", "add-product.html"));
 });
 
 // /admin/add-product => POST

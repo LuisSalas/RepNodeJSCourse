@@ -3,18 +3,18 @@ const path = require("path");
 const express = require("express");
 const bodyParser = require("body-parser");
 
-const app = express();
+const app = express(); // create an express application
 
-const adminRoutes = require("./routes/admin");
-const shopRoutes = require("./routes/shop");
+const adminRoutes = require("./routes/admin"); // import the admin routes
+const shopRoutes = require("./routes/shop"); // import the shop routes
 
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: false })); // to parse the body of incoming requests
+app.use(express.static(path.join(__dirname, "public"))); // to serve static files such as images, CSS files, and JavaScript files
 
-app.use("/admin", adminRoutes);
-app.use(shopRoutes);
+app.use("/admin", adminRoutes); // use the admin routes for all routes starting with /admin path of the incoming request (e.g., /admin/add-product)
+app.use(shopRoutes); // use the shop routes for all routes of the incoming request
 
 app.use((req, res, next) => {
-  //   res.status(404);
   res
     .status(404)
     .sendFile(path.join(__dirname, "views", "page-not-found.html"));

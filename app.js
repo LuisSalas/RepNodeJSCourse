@@ -18,9 +18,8 @@ app.use("/admin", adminData.routes); // use the admin routes for all routes star
 app.use(shopRoutes); // use the shop routes for all routes of the incoming request
 
 app.use((req, res, next) => {
-  res
-    .status(404)
-    .sendFile(path.join(__dirname, "views", "page-not-found.html"));
+  // res.status(404).sendFile(path.join(__dirname, "views", "404.html"));
+  res.status(404).render("404", { pageTitle: "Page Not Found" });
 });
 
 app.listen(3000);

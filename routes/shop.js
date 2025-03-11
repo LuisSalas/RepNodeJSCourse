@@ -8,13 +8,13 @@ const adminData = require("./admin");
 const router = express.Router(); // create a new router object
 
 router.get("/", (req, res, next) => {
-  // console.log(adminData.products);
   // res.sendFile(path.join(rootDir, "views", "shop.html")); // send the shop.html file as a response
   const products = adminData.products; // get the products array from the admin.js file
   res.render("shop", {
     prods: products,
     pageTitle: "Shop",
     path: "/",
+    hasProducts: products.length > 0, // check if there are products
   }); // render the shop view
 });
 

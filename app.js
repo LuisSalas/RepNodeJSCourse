@@ -2,10 +2,13 @@ const path = require("path");
 
 const express = require("express");
 const bodyParser = require("body-parser");
+const handlebars = require("express-handlebars"); // import the express-handlebars package
 
 const app = express(); // create an express application
 
-app.set("view engine", "pug"); // set the view engine to pug
+app.engine("hbs", handlebars()); // set the view engine to handlebars
+app.set("view engine", "hbs"); // set the view engine to pug
+// app.set("view engine", "pug"); // set the view engine to pug
 app.set("views", "views"); // set the views directory
 
 const adminData = require("./routes/admin"); // import the admin routes
@@ -18,16 +21,7 @@ app.use("/admin", adminData.routes); // use the admin routes for all routes star
 app.use(shopRoutes); // use the shop routes for all routes of the incoming request
 
 app.use((req, res, next) => {
-  // res.status(404).sendFile(path.join(__dirname, "views", "404.html"));
   res.status(404).render("404", { pageTitle: "Page Not Found" });
 });
 
 app.listen(3000);
-
-/** The  app.use()  method is used to add a middleware function to the middleware stack. The middleware function is executed for every incoming request.
- * The middleware function takes three arguments:
- * req : The request object
- * res : The response object
- * next : A function that is used to pass the request to the next middleware function in line
- * The  next()  function is used to pass the request
- **/

@@ -1,8 +1,8 @@
 /*
-    router.use will work for all the requests
-    router.post will work only for post requests
-    router.get will work only for get requests
-  */
+  router.use will work for all the requests
+  router.post will work only for post requests
+  router.get will work only for get requests
+*/
 
 const path = require("path");
 
@@ -26,7 +26,6 @@ router.get("/add-product", (req, res, next) => {
 
 // /admin/add-product => POST
 router.post("/add-product", (req, res, next) => {
-  // console.log(req.body);
   products.push({ product: req.body.product });
   res.redirect("/");
 });

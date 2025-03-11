@@ -2,20 +2,21 @@ const path = require("path");
 
 const express = require("express");
 const bodyParser = require("body-parser");
-const handlebars = require("express-handlebars"); // import the express-handlebars package
+// const handlebars = require("express-handlebars"); // import the express-handlebars package
 
 const app = express(); // create an express application
 
-app.engine(
-  "hbs",
-  handlebars({
-    layoutsDir: "views/layouts/",
-    defaultLayout: "main-layout",
-    extname: "hbs",
-  })
-); // set the view engine to handlebars
-app.set("view engine", "hbs"); // set the view engine to pug
+// app.engine(
+//   "hbs",
+//   handlebars({
+//     layoutsDir: "views/layouts/",
+//     defaultLayout: "main-layout",
+//     extname: "hbs",
+//   })
+// ); // set the view engine to handlebars
+// app.set("view engine", "hbs"); // set the view engine to handlebars
 // app.set("view engine", "pug"); // set the view engine to pug
+app.set("view engine", "ejs"); // set the view engine to ejs
 app.set("views", "views"); // set the views directory
 
 const adminData = require("./routes/admin"); // import the admin routes

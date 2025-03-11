@@ -21,6 +21,10 @@ router.get("/add-product", (req, res, next) => {
   res.render("add-product", {
     pageTitle: "Add Product",
     path: "/admin/add-product",
+    activeAddProduct: true,
+    formsCSS: true,
+    productCSS: true,
+    activeAddProduct: true,
   }); // render the add-product view
 });
 
@@ -30,6 +34,9 @@ router.post("/add-product", (req, res, next) => {
   res.redirect("/");
 });
 
-module.exports = { routes: router, products: products };
+module.exports = {
+  routes: router,
+  products: products,
+};
 // module.exports = router;
 // The  module.exports  object is used to export functions, objects, or primitive values from a file so that they can be used in other files.

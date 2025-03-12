@@ -21,7 +21,6 @@ app.set("views", "views"); // set the views directory
 
 const adminData = require("./routes/admin"); // import the admin routes
 const shopRoutes = require("./routes/shop"); // import the shop routes
-const { extname } = require("path/posix");
 
 app.use(bodyParser.urlencoded({ extended: false })); // to parse the body of incoming requests
 app.use(express.static(path.join(__dirname, "public"))); // to serve static files such as images, CSS files, and JavaScript files

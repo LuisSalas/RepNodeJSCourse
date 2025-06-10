@@ -8,35 +8,17 @@ const path = require("path");
 
 const express = require("express");
 
-const rootDir = require("../util/path");
+const productsController = require("../controllers/products");
 
 // The  express.Router()  function is used to create a new router object. This function is used when you want to create a new router object in your application to handle requests.
 const router = express.Router();
 
-const products = [];
-
 // /admin/add-product => GET
-router.get("/add-product", (req, res, next) => {
-  // res.sendFile(path.join(rootDir, "views", "add-product.html")); // send the add-product.html file as a response
-  res.render("add-product", {
-    pageTitle: "Add Product",
-    path: "/admin/add-product",
-    activeAddProduct: true,
-    formsCSS: true,
-    productCSS: true,
-    activeAddProduct: true,
-  }); // render the add-product view
-});
+router.get("/add-product", productsController.getAddProduct);
 
 // /admin/add-product => POST
-router.post("/add-product", (req, res, next) => {
-  products.push({ product: req.body.product });
-  res.redirect("/");
-});
+router.post("/add-product", productsController.postAddProduct);
 
-module.exports = {
-  routes: router,
-  products: products,
-};
+module.exports = router;
 // module.exports = router;
 // The  module.exports  object is used to export functions, objects, or primitive values from a file so that they can be used in other files.

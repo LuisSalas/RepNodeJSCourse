@@ -2,30 +2,37 @@ const fs = require("fs");
 const path = require("path");
 const rootDir = require("../util/path");
 
+const getProductsFromFile = (callback) => {
+  const p = path.join(rootDir, "data", "products.json");
+  fs.readFile(p, (err, fileContent) => {
+    if (err) {
+      return callback([]);
+    }
+    return callback(JSON.parse(fileContent));
+  });
+};
+
 module.exports = class Products {
   constructor(title) {
     this.title = title;
   }
 
   save() {
-    const p = path.join(rootDir, "data", "products.json");
-    fs.readFile(p, (err, fileContent) => {
-      let products = [];
-      if (!err) {
-        products = JSON.parse(fileContent);
-      }
+    getProductsFromFile((products) => {
       products.push(this);
+      const p = path.join(rootDir, "data", "products.json");
       fs.writeFile(p, JSON.stringify(products), (err) => {
         console.log(err);
       });
     });
   }
 
-  static fetchAll() {
-    const p = path.join(rootDir, "data", "products.json");
-    fs.readFile(p, (err, fileContent) => {
-      if (err) return [];
-      else return JSON.parse(fileContent);
-    });
+  /*
+    This return nothing cause read file is async function
+    We need to use a callback function to make it works
+  */
+
+  static fetchAll(callback) {
+    getProductsFromFile(callback);
   }
 };

@@ -1,7 +1,8 @@
 const Product = require("../models/products");
 
 exports.getAddProduct = (req, res, next) => {
-  res.render("add-product", {
+  res.render("admin/add-product", {
+    //Now add-product is into views/admin folder
     pageTitle: "Add Product",
     path: "/admin/add-product",
     activeAddProduct: true,
@@ -18,7 +19,7 @@ exports.postAddProduct = (req, res, next) => {
 
 exports.getProducts = (req, res, next) => {
   Product.fetchAll((products) => {
-    res.render("shop", {
+    res.render("shop/product-list", {
       prods: products,
       pageTitle: "Shop",
       path: "/",

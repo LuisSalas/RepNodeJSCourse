@@ -5,9 +5,6 @@ exports.getAddProduct = (req, res, next) => {
     //Now add-product is into views/admin folder
     pageTitle: "Add Product",
     path: "/admin/add-product",
-    activeAddProduct: true,
-    formsCSS: true,
-    productCSS: true,
   });
 };
 
@@ -19,13 +16,10 @@ exports.postAddProduct = (req, res, next) => {
 
 exports.getProducts = (req, res, next) => {
   Product.fetchAll((products) => {
-    res.render("shop/product-list", {
+    res.render("admin/products", {
       prods: products,
-      pageTitle: "Shop",
-      path: "/",
-      hasProducts: products.length > 0,
-      activeShop: true,
-      productCSS: true,
+      pageTitle: "Admin Products",
+      path: "/admin/products",
     });
   });
 };
